@@ -1,0 +1,6 @@
+# Enforce Unix-style line endings
+* text=auto
+
+# Set specific line endings for certain files if needed
+*.sh text eol=lf
+*.bat text eol=crlf

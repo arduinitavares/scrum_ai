@@ -1,0 +1,28 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: scrum_ai_mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - "27018:27017" 
+    restart: unless-stopped
+
+  dev_environment:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: scrum_ai_dev
+    volumes:
+      - .:/app  # Mount the current directory into /app in the container
+    ports:
+      - "8889:8888"  # Adjust if necessary
+    tty: true
+
+volumes:
+  mongodb_data:
+  mongodb_config:

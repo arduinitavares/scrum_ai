@@ -1,0 +1,85 @@
+```mermaid
+erDiagram
+    Project ||--o{ Roadmap : has
+    Project ||--o{ Vision : has
+    Project ||--o{ Theme : contains
+    Theme ||--o{ Feature : groups
+    Feature ||--o{ Epic : contains
+    Epic ||--o{ UserStory : breaks_down_to
+    UserStory ||--o{ Task : composed_of
+    Sprint ||--o{ Task : includes
+    
+    Project {
+        int id PK
+        string name
+        string description
+        date start_date
+        date end_date
+        string status
+    }
+    
+    Roadmap {
+        int id PK
+        string description
+        date start_date
+        date end_date
+    }
+    
+    Vision {
+        int id PK
+        string name
+        string details
+    }
+    
+    Theme {
+        int id PK
+        int project_id FK
+        string name
+        string description
+        int order
+    }
+    
+    Feature {
+        int id PK
+        int theme_id FK
+        string name
+        string description
+        string status
+    }
+    
+    Epic {
+        int id PK
+        int feature_id FK
+        string name
+        string description
+        string status
+    }
+    
+    UserStory {
+        int id PK
+        int epic_id FK
+        string description
+        string acceptance_criteria
+        string status
+        int estimate
+        string value
+    }
+    
+    Task {
+        int id PK
+        int user_story_id FK
+        int sprint_id FK
+        string description
+        string status
+        int estimate
+        string type
+    }
+    
+    Sprint {
+        int id PK
+        int project_id FK
+        string name
+        date start_date
+        date end_date
+        string status
+    }
